@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Weather App</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
     <script type="module" src="src/main.js"></script>
   </head>
   <body>
@@ -13,16 +13,23 @@
       <input type="text" id="location" />
       <button type="submit">Get data</button>
       <div class="current-data">
+        <h1>Current Weather</h1>
         <div class="precip-section">
+          <h3>Precipitation</h1>
+          <div class="icon"></div>
           <div class="precipprob"></div>
           <div class="precip"></div>
         </div>
         <div class="temp-section">
+          <h3>Temperature</h3>
+          <div class="icon"></div>
           <div class="temp"></div>
           <div class="mintemp"></div>
           <div class="maxtemp"></div>
         </div>
         <div class="wind-section">
+          <h3>Wind</h3>
+          <div class="icon"></div>
           <div class="windspeed"></div>
           <div class="feelslike"></div>
         </div>
