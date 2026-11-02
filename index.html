@@ -7,5 +7,26 @@
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="src/main.js"></script>
   </head>
-  <body></body>
+  <body>
+    <form>
+      <label for="location">Location:</label>
+      <input type="text" id="location" />
+      <button type="submit">Get data</button>
+      <div class="current-data">
+        <div class="precip-section">
+          <div class="precipprob"></div>
+          <div class="precip"></div>
+        </div>
+        <div class="temp-section">
+          <div class="temp"></div>
+          <div class="mintemp"></div>
+          <div class="maxtemp"></div>
+        </div>
+        <div class="wind-section">
+          <div class="windspeed"></div>
+          <div class="feelslike"></div>
+        </div>
+      </div>
+    </form>
+  </body>
 </html>
