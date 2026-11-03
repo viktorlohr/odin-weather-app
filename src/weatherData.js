@@ -37,8 +37,8 @@ function getRelevantData(dayData) {
   const relevantKeys = [
     "datetime",
     "temp",
-    "maxtemp",
-    "mintemp",
+    "tempmax",
+    "tempmin",
     "precip",
     "precipprob",
     "cloudcover",

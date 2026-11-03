@@ -1,14 +1,12 @@
 import { convertToFahrenheit, convertDate } from "./helpers.js";
 
 export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
-  if (isFahrenheit) {
-    dayWeatherData.temp = convertToFahrenheit(dayWeatherData.temp) + " °F";
-    dayWeatherData.feelslike =
-      convertToFahrenheit(dayWeatherData.feelslike) + " °F";
-  } else {
-    dayWeatherData.temp += " °C";
-    dayWeatherData.feelslike += " °C";
-  }
+  const tempKeys = ["temp", "feelslike", "tempmin", "tempmax"];
+  const tempDisplayEntries = tempKeys.map((key) => [
+    key,
+    displayTemperature(dayWeatherData[key]),
+  ]);
+  const tempDisplayData = Object.fromEntries(tempDisplayEntries);
 
   const dayWeatherCard = document.createElement("div");
   dayWeatherCard.classList.add("day-weather-card");
@@ -86,7 +84,8 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
     tempSectionHeading.textContent = "Temperature";
     tempSectionEl.classList.add("temp");
     const tempEl = document.createElement("div");
-    tempEl.textContent = dayWeatherData.temp;
+    tempEl.textContent = tempDisplayData.temp;
+
     tempSectionEl.append(tempSectionHeading, tempEl);
     dayWeatherCardSections.append(tempSectionEl);
   }
@@ -97,10 +96,18 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
     windSectionHeading.textContent = "Wind";
     windSectionEl.classList.add("wind");
     const windSpeedEl = document.createElement("div");
-    windSpeedEl.textContent = dayWeatherData.windspeed;
+    windSpeedEl.textContent = dayWeatherData.windspeed + " km/h";
     const feelsLikeEl = document.createElement("div");
-    feelsLikeEl.textContent = dayWeatherData.feelslike;
+    feelsLikeEl.textContent = "feels like " + tempDisplayData.feelslike;
     windSectionEl.append(windSectionHeading, feelsLikeEl, windSpeedEl);
     dayWeatherCardSections.append(windSectionEl);
+  }
+
+  function displayTemperature(t) {
+    if (isFahrenheit) {
+      return convertToFahrenheit(t) + " °F";
+    } else {
+      return Math.trunc(t) + " °C";
+    }
   }
 }

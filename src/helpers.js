@@ -4,5 +4,5 @@ export function convertDate(isoDate) {
 }
 
 export function convertToFahrenheit(tempCelsius) {
-  return tempCelsius * 1.8 + 32;
+  return Math.trunc(tempCelsius * 1.8 + 32);
 }
