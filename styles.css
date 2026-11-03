@@ -1,5 +1,17 @@
 @import url(reset.css);
 
+:root {
+  --secondary-bg-color: rgb(15, 76, 137);
+}
+
+.day-weather-card {
+  background-color: var(--secondary-bg-color);
+  width: max-content;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 12px;
+}
+
 .day-weather-card > .sections {
   display: flex;
   flex-direction: row;
