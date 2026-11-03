@@ -1,5 +1,5 @@
 import { createDayWeatherCard } from "./createDayWeatherCard.js";
-import { getAllDaysRelevantData } from "./getWeatherData.js";
+import { WeatherData } from "./getWeatherData.js";
 import { FahrenheitToggle } from "./fahrenheitToggle.js";
 
 export async function render() {

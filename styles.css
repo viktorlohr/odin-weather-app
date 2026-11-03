@@ -17,3 +17,8 @@
   flex-direction: row;
   gap: 1rem;
 }
+
+button {
+  margin: 6px;
+  padding: 2px;
+}
