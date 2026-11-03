@@ -41,3 +41,32 @@ function getRelevantData(dayData) {
 export function convertToFahrenheit(tempCelsius) {
   return tempCelsius * 1.8 + 32;
 }
+
+export async function getMockData() {
+  return [
+    {
+      datetime: "",
+      temp: 5.4,
+      feelslike: 5.4,
+      precip: 0,
+      precipprob: 0,
+      windspeed: 4,
+    },
+    {
+      datetime: "2026-11-05",
+      temp: 5.4,
+      feelslike: 5.4,
+      precip: 0,
+      precipprob: 0,
+      windspeed: 4,
+    },
+    {
+      datetime: "2026-11-04",
+      temp: 5.4,
+      feelslike: 5.4,
+      precip: 0,
+      precipprob: 0,
+      windspeed: 4,
+    },
+  ];
+}

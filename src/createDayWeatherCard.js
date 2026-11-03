@@ -1,4 +1,5 @@
 import { convertToFahrenheit } from "./getWeatherData.js";
+import { convertDate } from "./helpers.js";
 
 export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
   if (isFahrenheit) {
@@ -29,7 +30,7 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
     const dayWeatherCardHeading = document.createElement("h2");
     let heading;
     if (dayWeatherData.datetime.split("-").length === 3) {
-      heading = "Weather on " + dayWeatherData.datetime;
+      heading = "Weather on " + convertDate(dayWeatherData.datetime);
     } else {
       heading = "Current weather";
     }
