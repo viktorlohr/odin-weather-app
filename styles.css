@@ -1,1 +1,7 @@
 @import url(reset.css);
+
+.day-weather-card > .sections {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
