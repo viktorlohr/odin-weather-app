@@ -1,12 +1,16 @@
 const KEY = "C8H98W67P75VEZM2Y2QHH4FT9";
 
 export const WeatherData = {
+  currentLocation: undefined,
   allDaysRelevantData: undefined,
   getAllDaysRelevantData,
 };
 
 export async function getAllDaysRelevantData(location) {
-  if (WeatherData.allDaysRelevantData) {
+  if (
+    location === WeatherData.currentLocation &&
+    WeatherData.allDaysRelevantData
+  ) {
     return WeatherData.allDaysRelevantData;
   }
 
@@ -25,6 +29,7 @@ export async function getAllDaysRelevantData(location) {
       getRelevantData(d),
     );
 
+    WeatherData.currentLocation = location;
     WeatherData.allDaysRelevantData = allDaysRelevantData;
 
     return allDaysRelevantData;
