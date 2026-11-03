@@ -1,6 +1,6 @@
 const KEY = "C8H98W67P75VEZM2Y2QHH4FT9";
 
-export async function getWeatherData(location) {
+export async function getAllDaysRelevantData(location) {
   try {
     const response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=${KEY}`,
@@ -9,12 +9,14 @@ export async function getWeatherData(location) {
 
     console.log(allData);
 
-    const currentData = allData.currentConditions;
+    const todayData = allData.currentConditions;
+    const daysData = allData.days;
 
-    const currentRelevantData = getRelevantData(currentData);
+    const allDaysRelevantData = [todayData, ...daysData].map((d) =>
+      getRelevantData(d),
+    );
 
-    console.log(currentData);
-    return currentRelevantData;
+    return allDaysRelevantData;
   } catch {
     console.log("Could not get data");
   }

@@ -83,18 +83,25 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
     const cloudCoverEl = document.createElement("div");
     cloudCoverEl.classList.add("cloudcover");
 
-    const cloudcover = dayWeatherCard.cloudcover;
+    const cloudcover = dayWeatherData.cloudcover;
+    const percipprob = dayWeatherData.percipprob;
     let textContent;
     if (cloudcover < 10) {
       textContent = "☀️";
     } else if (cloudcover < 40) {
       textContent = "🌤️";
     } else if (cloudcover < 60) {
-      textContent = "⛅️";
-    } else if (cloudcover < 80) {
-      textContent = "🌥️";
+      if (percipprob > 60) {
+        textContent = "🌦️";
+      } else {
+        textContent = "⛅️";
+      }
     } else {
-      textContent = "☁️";
+      if (percipprob > 60) {
+        textContent = "🌧️";
+      } else {
+        textContent = "☁️";
+      }
     }
 
     cloudCoverEl.textContent = textContent;
