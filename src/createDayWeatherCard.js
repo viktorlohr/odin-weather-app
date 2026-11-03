@@ -20,7 +20,6 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
   addPrecipSection();
   addTempSection();
   addWindSection();
-  addCloudSection();
 
   dayWeatherCard.appendChild(dayWeatherCardSections);
   document.getElementById("content").appendChild(dayWeatherCard);
@@ -46,7 +45,38 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
     precipEl.textContent = dayWeatherData.precip + " mm";
     const precipProbEl = document.createElement("div");
     precipProbEl.textContent = dayWeatherData.precipprob + " %";
-    precipSectionEl.append(precipSectionHeading, precipEl, precipProbEl);
+
+    const cloudCoverEl = document.createElement("div");
+    cloudCoverEl.classList.add("cloudcover");
+    const cloudcover = dayWeatherData.cloudcover;
+    const percipprob = dayWeatherData.precipprob;
+    let textContent;
+    if (cloudcover < 10) {
+      textContent = "☀️";
+    } else if (cloudcover < 40) {
+      textContent = "🌤️";
+    } else if (cloudcover < 60) {
+      if (percipprob > 60) {
+        textContent = "🌦️🌈";
+      } else {
+        textContent = "⛅️";
+      }
+    } else {
+      if (percipprob > 60) {
+        textContent = "🌧️";
+      } else {
+        textContent = "☁️";
+      }
+    }
+    cloudCoverEl.textContent = textContent;
+
+    precipSectionEl.append(
+      precipSectionHeading,
+      cloudCoverEl,
+      precipEl,
+      precipProbEl,
+    );
+
     dayWeatherCardSections.appendChild(precipSectionEl);
   }
 
@@ -72,40 +102,5 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
     feelsLikeEl.textContent = dayWeatherData.feelslike;
     windSectionEl.append(windSectionHeading, feelsLikeEl, windSpeedEl);
     dayWeatherCardSections.append(windSectionEl);
-  }
-
-  function addCloudSection() {
-    const cloudSectionEl = document.createElement("div");
-    const cloudSectionHeading = document.createElement("h3");
-    cloudSectionHeading.textContent = "Clouds";
-    cloudSectionEl.classList.add("clouds");
-    const cloudCoverEl = document.createElement("div");
-    cloudCoverEl.classList.add("cloudcover");
-
-    const cloudcover = dayWeatherData.cloudcover;
-    const percipprob = dayWeatherData.precipprob;
-    let textContent;
-    if (cloudcover < 10) {
-      textContent = "☀️";
-    } else if (cloudcover < 40) {
-      textContent = "🌤️";
-    } else if (cloudcover < 60) {
-      if (percipprob > 60) {
-        textContent = "🌦️🌈";
-      } else {
-        textContent = "⛅️";
-      }
-    } else {
-      if (percipprob > 60) {
-        textContent = "🌧️";
-      } else {
-        textContent = "☁️";
-      }
-    }
-
-    cloudCoverEl.textContent = textContent;
-
-    cloudSectionEl.append(cloudSectionHeading, cloudCoverEl);
-    dayWeatherCardSections.appendChild(cloudSectionEl);
   }
 }
