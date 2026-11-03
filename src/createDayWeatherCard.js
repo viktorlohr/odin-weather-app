@@ -1,4 +1,15 @@
-export function createDayWeatherCard(dayWeatherData) {
+import { convertToFahrenheit } from "./getWeatherData.js";
+
+export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
+  if (isFahrenheit) {
+    dayWeatherData.temp = convertToFahrenheit(dayWeatherData.temp) + " °F";
+    dayWeatherData.feelslike =
+      convertToFahrenheit(dayWeatherData.feelslike) + " °F";
+  } else {
+    dayWeatherData.temp += " °C";
+    dayWeatherData.feelslike += " °C";
+  }
+
   const dayWeatherCard = document.createElement("div");
   dayWeatherCard.classList.add("day-weather-card");
 
@@ -9,6 +20,7 @@ export function createDayWeatherCard(dayWeatherData) {
   addPrecipSection();
   addTempSection();
   addWindSection();
+  addCloudSection();
 
   dayWeatherCard.appendChild(dayWeatherCardSections);
   document.getElementById("content").appendChild(dayWeatherCard);
@@ -17,7 +29,7 @@ export function createDayWeatherCard(dayWeatherData) {
     const dayWeatherCardHeading = document.createElement("h2");
     let heading;
     if (dayWeatherData.datetime.split("-").length === 3) {
-      heading = "Weather on " + heading;
+      heading = "Weather on " + dayWeatherData.datetime;
     } else {
       heading = "Current weather";
     }
@@ -31,9 +43,9 @@ export function createDayWeatherCard(dayWeatherData) {
     precipSectionHeading.textContent = "Precipitation";
     precipSectionEl.classList.add("precip");
     const precipEl = document.createElement("div");
-    precipEl.textContent = dayWeatherData.precip;
+    precipEl.textContent = dayWeatherData.precip + " mm";
     const precipProbEl = document.createElement("div");
-    precipProbEl.textContent = dayWeatherData.precipprob;
+    precipProbEl.textContent = dayWeatherData.precipprob + " %";
     precipSectionEl.append(precipSectionHeading, precipEl, precipProbEl);
     dayWeatherCardSections.appendChild(precipSectionEl);
   }
@@ -60,5 +72,33 @@ export function createDayWeatherCard(dayWeatherData) {
     feelsLikeEl.textContent = dayWeatherData.feelslike;
     windSectionEl.append(windSectionHeading, feelsLikeEl, windSpeedEl);
     dayWeatherCardSections.append(windSectionEl);
+  }
+
+  function addCloudSection() {
+    const cloudSectionEl = document.createElement("div");
+    const cloudSectionHeading = document.createElement("h3");
+    cloudSectionHeading.textContent = "Clouds";
+    cloudSectionEl.classList.add("clouds");
+    const cloudCoverEl = document.createElement("div");
+    cloudCoverEl.classList.add("cloudcover");
+
+    const cloudcover = dayWeatherCard.cloudcover;
+    let textContent;
+    if (cloudcover < 10) {
+      textContent = "☀️";
+    } else if (cloudcover < 40) {
+      textContent = "🌤️";
+    } else if (cloudcover < 60) {
+      textContent = "⛅️";
+    } else if (cloudcover < 80) {
+      textContent = "🌥️";
+    } else {
+      textContent = "☁️";
+    }
+
+    cloudCoverEl.textContent = textContent;
+
+    cloudSectionEl.append(cloudSectionHeading, cloudCoverEl);
+    dayWeatherCardSections.appendChild(cloudSectionEl);
   }
 }

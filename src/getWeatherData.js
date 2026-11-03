@@ -37,3 +37,7 @@ function getRelevantData(dayData) {
     Object.entries(dayData).filter(([key]) => relevantKeys.includes(key)),
   );
 }
+
+export function convertToFahrenheit(tempCelsius) {
+  return tempCelsius * 1.8 + 32;
+}
