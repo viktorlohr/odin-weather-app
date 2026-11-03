@@ -1,5 +1,4 @@
-import { convertToFahrenheit } from "./getWeatherData.js";
-import { convertDate } from "./helpers.js";
+import { convertToFahrenheit, convertDate } from "./helpers.js";
 
 export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
   if (isFahrenheit) {
@@ -84,7 +83,7 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
     cloudCoverEl.classList.add("cloudcover");
 
     const cloudcover = dayWeatherData.cloudcover;
-    const percipprob = dayWeatherData.percipprob;
+    const percipprob = dayWeatherData.precipprob;
     let textContent;
     if (cloudcover < 10) {
       textContent = "☀️";
@@ -92,7 +91,7 @@ export function createDayWeatherCard(dayWeatherData, isFahrenheit) {
       textContent = "🌤️";
     } else if (cloudcover < 60) {
       if (percipprob > 60) {
-        textContent = "🌦️";
+        textContent = "🌦️🌈";
       } else {
         textContent = "⛅️";
       }

@@ -51,10 +51,6 @@ function getRelevantData(dayData) {
   );
 }
 
-export function convertToFahrenheit(tempCelsius) {
-  return tempCelsius * 1.8 + 32;
-}
-
 export async function getMockData() {
   return [
     {
